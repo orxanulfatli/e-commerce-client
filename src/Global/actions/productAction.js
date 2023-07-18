@@ -32,16 +32,17 @@ import {
 } from "../constants/productConstants";
 
 // Get All Products
+const render = process.env.REACT_APP_SERVER_URI;
 export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
 
-      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+      let link = `${render}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
       if (category) {
-        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+        link = `${render}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
 
       const { data } = await axios.get(link);
@@ -155,7 +156,7 @@ export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/product/${id}`);
+    const { data } = await axios.get(`${render}/api/v1/product/${id}`);
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
