@@ -32,15 +32,12 @@ import {
 } from "../constants/productConstants";
 
 // Get All Products
-export let apiUrl  =
-  process.env.NODE_ENV === "production"
-    ? process.env.REACT_APP_PROD_URL
-    : process.env.REACT_APP_DEV_URL;
+export let apiUrl  = 'https://e-commerce-server-l2fl.onrender.com/'
 export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
     try {
-      console.log(apiUrl);
+    
       dispatch({ type: ALL_PRODUCT_REQUEST });
 
       let link = `${apiUrl}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
