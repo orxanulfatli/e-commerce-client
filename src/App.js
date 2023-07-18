@@ -41,6 +41,7 @@ import NotFound from "./Pages/Not Found/NotFound";
 import Products from "./component/Product/Products";
 import MainLayout from "./component/layout/MainLayout/MainLayout";
 import AdminLayout from "./component/layout/AdminLayout/AdminLayout";
+import { apiUrl } from "./Global/actions/productAction";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -48,7 +49,7 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
+    const { data } = await axios.get(`${apiUrl}/api/v1/stripeapikey`);
 
     setStripeApiKey(data.stripeApiKey);
   }
