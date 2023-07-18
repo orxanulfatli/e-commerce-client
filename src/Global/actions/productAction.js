@@ -32,7 +32,7 @@ import {
 } from "../constants/productConstants";
 
 // Get All Products
-export let apiUrl  = 'https://e-commerce-server-l2fl.onrender.com/'
+export let apiUrl  = 'https://e-commerce-server-l2fl.onrender.com'
 export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
