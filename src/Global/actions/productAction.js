@@ -37,6 +37,7 @@ export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
     try {
+      console.log(render)
       dispatch({ type: ALL_PRODUCT_REQUEST });
 
       let link = `${render}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
