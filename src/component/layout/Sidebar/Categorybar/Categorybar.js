@@ -1,7 +1,7 @@
 import React from 'react';
 import './Categorybar.css'
-import Typography from "@material-ui/core/Typography";
-import { Link, useHistory } from "react-router-dom";
+// import Typography from "@material-ui/core/Typography";
+// import { Link, useHistory } from "react-router-dom";
 import { useHistorySearch } from "../../../../hooks/useHistorySearch";
 
 import ComputerIcon from "@material-ui/icons/Computer";
