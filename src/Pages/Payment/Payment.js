@@ -18,6 +18,7 @@ import CreditCardIcon from "@material-ui/icons/CreditCard";
 import EventIcon from "@material-ui/icons/Event";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { createOrder, clearErrors } from "../../Global/actions/orderAction";
+import { apiUrl } from "../../config/api";
 
 const Payment = ({ history }) => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -57,14 +58,17 @@ const Payment = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        `${apiUrl}/api/v1/payment/process`,
         paymentData,
         config
       );
 
       const client_secret = data.client_secret;
 
-      if (!stripe || !elements) return;
+      if (!stripe || !elements) {
+        payBtn.current.disabled = false;
+        return;
+      }
 
       const result = await stripe.confirmCardPayment(client_secret, {
         payment_method: {
@@ -103,7 +107,11 @@ const Payment = ({ history }) => {
       }
     } catch (error) {
       payBtn.current.disabled = false;
-      alert.error(error.response.data.message);
+      alert.error(
+        error.response?.data?.message ||
+          error.message ||
+          "Payment request failed"
+      );
     }
   };
 
