@@ -44,6 +44,15 @@
   border: none;
   transition: all 0.5s;
 }
+.authInlineError {
+  margin: 8px 12px 4px;
+  padding: 10px 12px;
+  border: 1px solid #f5c2c7;
+  background: #fff3f3;
+  color: #842029;
+  border-radius: 6px;
+  font: 500 0.85vmax "Roboto";
+}
 
 .loginForm,
 .signUpForm {
@@ -174,6 +183,10 @@
   }
   .login_signUp_toggle > p {
     font: 300 1.5vmax "Roboto";
+  }
+  .authInlineError {
+    font: 500 1.6vmax "Roboto";
+    margin: 8px 20px 6px;
   }
 
   .loginForm,

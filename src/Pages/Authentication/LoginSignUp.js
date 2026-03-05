@@ -34,14 +34,17 @@ const LoginSignUp = ({ history, location }) => {
 
   const [avatar, setAvatar] = useState("/Profile.png");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+  const [uiError, setUiError] = useState("");
 
   const loginSubmit = (e) => {
     e.preventDefault();
+    setUiError("");
     dispatch(login(loginEmail, loginPassword));
   };
 
   const registerSubmit = (e) => {
     e.preventDefault();
+    setUiError("");
 
     const myForm = new FormData();
 
@@ -73,17 +76,20 @@ const LoginSignUp = ({ history, location }) => {
 
   useEffect(() => {
     if (error) {
+      setUiError(error);
       alert.error(error);
       dispatch(clearErrors());
     }
 
     if (isAuthenticated) {
+      setUiError("");
       history.push(redirect);
     }
   }, [dispatch, error, alert, history, isAuthenticated, redirect]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
+      setUiError("");
       switcherTab.current.classList.add("shiftToNeutral");
       switcherTab.current.classList.remove("shiftToRight");
 
@@ -91,6 +97,7 @@ const LoginSignUp = ({ history, location }) => {
       loginTab.current.classList.remove("shiftToLeft");
     }
     if (tab === "register") {
+      setUiError("");
       switcherTab.current.classList.add("shiftToRight");
       switcherTab.current.classList.remove("shiftToNeutral");
 
@@ -116,6 +123,7 @@ const LoginSignUp = ({ history, location }) => {
               </div>
               <div style={{ padding: "5px" }}>Guest email:funreal41@gmail.com</div>
               <div style={{ padding: "5px" }}>Guest password:12345678</div>
+              {uiError ? <div className="authInlineError">{uiError}</div> : null}
 
               <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
                 <div className="loginEmail">
@@ -187,6 +195,7 @@ const LoginSignUp = ({ history, location }) => {
                     type="file"
                     name="avatar"
                     accept="image/*"
+                    required
                     onChange={registerDataChange}
                   />
                 </div>

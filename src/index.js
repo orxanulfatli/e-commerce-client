@@ -15,6 +15,24 @@ const options = {
 };
 
 axios.defaults.withCredentials = true;
+if (process.env.NODE_ENV !== "production") {
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      console.group("[API ERROR]");
+      console.log("URL:", error.config?.url);
+      console.log("Method:", error.config?.method?.toUpperCase());
+      console.log("Status:", error.response?.status);
+      console.log(
+        "Message:",
+        error.response?.data?.message || error.message || "Unknown error"
+      );
+      console.log("Response:", error.response?.data);
+      console.groupEnd();
+      return Promise.reject(error);
+    }
+  );
+}
 
 ReactDOM.render(
   <Provider store={store}>
