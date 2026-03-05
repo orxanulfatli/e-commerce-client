@@ -21,7 +21,10 @@ import {
 } from "../constants/orderConstants";
 
 import axios from "axios";
-import { apiUrl } from "./productAction";
+import { apiUrl } from "../../config/api";
+
+const getErrorMessage = (error) =>
+  error.response?.data?.message || error.message || "Something went wrong";
 
 // Create Order
 export const createOrder = (order) => async (dispatch) => {
@@ -43,7 +46,7 @@ export const createOrder = (order) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CREATE_ORDER_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -59,7 +62,7 @@ export const myOrders = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: MY_ORDERS_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -75,7 +78,7 @@ export const getAllOrders = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALL_ORDERS_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -100,7 +103,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_ORDER_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -116,7 +119,7 @@ export const deleteOrder = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_ORDER_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -132,7 +135,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };

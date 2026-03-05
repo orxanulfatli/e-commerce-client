@@ -18,6 +18,7 @@ const Dashboard = () => {
   const { orders } = useSelector((state) => state.allOrders);
 
   const { users } = useSelector((state) => state.allUsers);
+  const productCount = products?.length || 0;
 
   let outOfStock = 0;
 
@@ -58,7 +59,7 @@ const Dashboard = () => {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [outOfStock, products.length - outOfStock],
+        data: [outOfStock, productCount - outOfStock],
       },
     ],
   };
@@ -80,7 +81,7 @@ const Dashboard = () => {
           <div className="dashboardSummaryBox2">
             <Link to="/admin/products">
               <p>Product</p>
-              <p>{products && products.length}</p>
+              <p>{productCount}</p>
             </Link>
             <Link to="/admin/orders">
               <p>Orders</p>

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store";
+import axios from "axios";
 
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -12,6 +13,8 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE,
 };
+
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <Provider store={store}>

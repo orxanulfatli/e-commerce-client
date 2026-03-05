@@ -30,9 +30,12 @@ import {
   DELETE_REVIEW_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
+import { apiUrl } from "../../config/api";
+
+const getErrorMessage = (error) =>
+  error.response?.data?.message || error.message || "Something went wrong";
 
 // Get All Products
-export let apiUrl  = 'https://e-commerce-server-l2fl.onrender.com'
 export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
   async (dispatch) => {
@@ -55,7 +58,7 @@ export const getProduct =
     } catch (error) {
       dispatch({
         type: ALL_PRODUCT_FAIL,
-        payload: error.response.data.message,
+        payload: getErrorMessage(error),
       });
     }
   };
@@ -74,7 +77,7 @@ export const getAdminProduct = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ADMIN_PRODUCT_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -101,7 +104,7 @@ export const createProduct = (productData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: NEW_PRODUCT_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -128,7 +131,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_PRODUCT_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -147,7 +150,7 @@ export const deleteProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_PRODUCT_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -166,7 +169,7 @@ export const getProductDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -193,7 +196,7 @@ export const newReview = (reviewData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: NEW_REVIEW_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -212,7 +215,7 @@ export const getAllReviews = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALL_REVIEW_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };
@@ -233,7 +236,7 @@ export const deleteReviews = (reviewId, productId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_REVIEW_FAIL,
-      payload: error.response.data.message,
+      payload: getErrorMessage(error),
     });
   }
 };

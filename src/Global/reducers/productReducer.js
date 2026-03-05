@@ -60,6 +60,7 @@ export const productsReducer = (state = { products: [] }, action) => {
     case ADMIN_PRODUCT_FAIL:
       return {
         loading: false,
+        products: [],
         error: action.payload,
       };
 

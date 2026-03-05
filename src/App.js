@@ -41,7 +41,7 @@ import NotFound from "./Pages/Not Found/NotFound";
 import Products from "./component/Product/Products";
 import MainLayout from "./component/layout/MainLayout/MainLayout";
 import AdminLayout from "./component/layout/AdminLayout/AdminLayout";
-import { apiUrl } from "./Global/actions/productAction";
+import { apiUrl } from "./config/api";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
