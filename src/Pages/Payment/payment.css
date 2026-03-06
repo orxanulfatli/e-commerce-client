@@ -2,13 +2,14 @@
   display: grid;
   place-items: center;
   background-color: rgb(255, 255, 255);
-  height: 65vh;
+  min-height: 65vh;
   margin: 2vmax;
+  padding-bottom: 2rem;
 }
 
 .paymentForm {
   width: 22%;
-  height: 100%;
+  height: auto;
 }
 
 .paymentForm > p {
@@ -25,6 +26,28 @@
   display: flex;
   align-items: center;
   margin: 2vmax 0;
+}
+.paymentTestInfo {
+  display: block !important;
+  margin: 1vmax 0 1.5vmax !important;
+  padding: 0.8vmax 1vmax;
+  border: 1px solid rgba(34, 110, 255, 0.25);
+  background: rgba(34, 110, 255, 0.08);
+  border-radius: 6px;
+  color: #1a2f66;
+}
+.paymentTestInfoTitle {
+  font: 600 0.9vmax "Roboto";
+  margin-bottom: 0.4vmax;
+}
+.paymentTestInfo > p {
+  font: 400 0.8vmax "Roboto";
+  margin: 0.25vmax 0;
+}
+.paymentTestWarning {
+  margin-top: 0.6vmax !important;
+  color: #8a1f1f;
+  font-weight: 500 !important;
 }
 
 .paymentInput {
@@ -74,7 +97,21 @@
   .paymentForm > div {
     margin: 10vw 0;
   }
-
+  .paymentTestInfo {
+    margin: 5vw 0 6vw !important;
+    padding: 4vw;
+  }
+  .paymentTestInfoTitle {
+    font: 600 3.5vw "Roboto";
+    margin-bottom: 1.2vw;
+  }
+  .paymentTestInfo > p {
+    font: 400 3.2vw "Roboto";
+    margin: 1.1vw 0;
+  }
+  .paymentTestWarning {
+    margin-top: 2vw !important;
+  }
   .paymentInput {
     padding: 4vw 10vw;
   }

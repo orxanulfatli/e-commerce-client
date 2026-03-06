@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Test Credentials
+
+- Demo Login Email: `funreal41@gmail.com`
+- Demo Login Password: `12345678`
+- Payment Mode: Stripe Test (Sandbox)
+- Test Card Number: `4242 4242 4242 4242`
+- Expiry: any future date (example: `12/34`)
+- CVC: any 3 digits (example: `123`)
+- ZIP/Postal: use a valid value in the Shipping step (example: `12345`)
+
 ## Available Scripts
 
 In the project directory, you can run:

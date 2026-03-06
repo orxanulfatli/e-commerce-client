@@ -123,6 +123,10 @@ const LoginSignUp = ({ history, location }) => {
               </div>
               <div style={{ padding: "5px" }}>Guest email:funreal41@gmail.com</div>
               <div style={{ padding: "5px" }}>Guest password:12345678</div>
+              <div style={{ padding: "5px" }}>
+                This is a demo store. Add products to cart, continue to checkout,
+                and use demo card details on the Payment page.
+              </div>
               {uiError ? <div className="authInlineError">{uiError}</div> : null}
 
               <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>

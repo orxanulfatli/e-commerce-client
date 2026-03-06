@@ -52,6 +52,24 @@
   display: grid;
   grid-template-columns: 4fr 1fr 1fr;
 }
+.cartDemoInfo {
+  width: 90%;
+  margin: 1vmax auto 0;
+  padding: 1vmax 1.2vmax;
+  border: 1px solid rgba(34, 110, 255, 0.3);
+  background: rgba(34, 110, 255, 0.08);
+  border-radius: 6px;
+  color: #1a2f66;
+  font: 400 0.8vmax "Roboto";
+  box-sizing: border-box;
+}
+.cartDemoInfoTitle {
+  font: 600 0.9vmax "Roboto";
+  margin: 0 0 0.4vmax;
+}
+.cartDemoInfo > p {
+  margin: 0.3vmax 0;
+}
 
 .cartInput {
   display: flex;
@@ -138,6 +156,20 @@
   .cartContainer {
     width: 100%;
     grid-template-columns: 3fr 1fr 1fr;
+  }
+  .cartDemoInfo {
+    width: 100%;
+    margin-top: 3vw;
+    padding: 3.5vw;
+    font: 400 3.1vw "Roboto";
+    border-radius: 0;
+  }
+  .cartDemoInfoTitle {
+    font: 600 3.4vw "Roboto";
+    margin-bottom: 1.6vw;
+  }
+  .cartDemoInfo > p {
+    margin: 1.1vw 0;
   }
 
   .cartInput {

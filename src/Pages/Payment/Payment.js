@@ -36,6 +36,9 @@ const Payment = ({ history }) => {
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
   };
+  const cardNumberOptions = { placeholder: "4242 4242 4242 4242" };
+  const cardExpiryOptions = { placeholder: "MM / YY" };
+  const cardCvcOptions = { placeholder: "CVC" };
 
   const order = {
     shippingInfo,
@@ -129,17 +132,32 @@ const Payment = ({ history }) => {
       <div className="paymentContainer">
         <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
           <Typography>Card Info</Typography>
+          <div className="paymentTestInfo">
+            <p className="paymentTestInfoTitle">Demo Payment</p>
+            <p>
+              This is a demo checkout. Use the card details below to place a
+              test order.
+            </p>
+            <p>No real money will be charged.</p>
+            <p>Card Number: 4242 4242 4242 4242</p>
+            <p>Expiry Date: Any future date (e.g. 12/34)</p>
+            <p>CVC: Any 3 digits (e.g. 123)</p>
+            <p>ZIP/Postal Code comes from your Shipping Address step.</p>
+            <p className="paymentTestWarning">
+              These are demo card details, not a real bank card.
+            </p>
+          </div>
           <div>
             <CreditCardIcon />
-            <CardNumberElement className="paymentInput" />
+            <CardNumberElement className="paymentInput" options={cardNumberOptions} />
           </div>
           <div>
             <EventIcon />
-            <CardExpiryElement className="paymentInput" />
+            <CardExpiryElement className="paymentInput" options={cardExpiryOptions} />
           </div>
           <div>
             <VpnKeyIcon />
-            <CardCvcElement className="paymentInput" />
+            <CardCvcElement className="paymentInput" options={cardCvcOptions} />
           </div>
 
           <input

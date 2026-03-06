@@ -56,6 +56,15 @@ const Cart = ({ history }) => {
               <p>Subtotal</p>
             </div>
 
+            <div className="cartDemoInfo">
+              <p className="cartDemoInfoTitle">Demo Purchase Guide</p>
+              <p>
+                1) Add item(s) to cart 2) Click Check Out 3) Fill shipping details
+                4) On Payment page, use demo card details to place a test order.
+              </p>
+              <p>No real money will be charged.</p>
+            </div>
+
             {cartItems &&
               cartItems.map((item) => (
                 <div className="cartContainer" key={item.product}>
