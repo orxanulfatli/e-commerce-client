@@ -6,7 +6,6 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AccountBoxOutlinedIcon from "@material-ui/icons/AccountBoxOutlined";
 import Badge from "@material-ui/core/Badge";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import Loader from "../../Loader/Loader";
 import UserOptions from "./UserOptions";
 import Topbar from "./Topbar";
 import SearchBar from "./SearchBar";
@@ -14,11 +13,10 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 
 
 const Header = () => {
-  const { isAuthenticated, user, loading } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
     const { cartItems } = useSelector((state) => state.cart);
 
-  if (loading) return <Loader />;
-  if (isAuthenticated)
+  if (isAuthenticated && user)
     return (
       <>
 

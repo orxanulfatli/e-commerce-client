@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
@@ -47,12 +47,30 @@ function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
+  const [stripeLoading, setStripeLoading] = useState(true);
+  const [stripeError, setStripeError] = useState("");
 
-  async function getStripeApiKey() {
-    const { data } = await axios.get(`${apiUrl}/api/v1/stripeapikey`);
+  const getStripeApiKey = useCallback(async () => {
+    setStripeLoading(true);
+    setStripeError("");
+    try {
+      const { data } = await axios.get(`${apiUrl}/api/v1/stripeapikey`);
+      setStripeApiKey(data.stripeApiKey || "");
+    } catch (error) {
+      setStripeApiKey("");
+      setStripeError(
+        error.response?.data?.message ||
+          "Payment configuration is unavailable right now."
+      );
+    } finally {
+      setStripeLoading(false);
+    }
+  }, []);
 
-    setStripeApiKey(data.stripeApiKey);
-  }
+  const stripePromise = useMemo(
+    () => (stripeApiKey ? loadStripe(stripeApiKey) : null),
+    [stripeApiKey]
+  );
 
   useEffect(() => {
     WebFont.load({
@@ -64,7 +82,7 @@ function App() {
     store.dispatch(loadUser());
 
     getStripeApiKey();
-  }, []);
+  }, [getStripeApiKey]);
 
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
 
@@ -180,11 +198,34 @@ function App() {
                 path="/order/:id"
                 component={OrderDetails}
               />
-              {stripeApiKey && (
-                <Elements stripe={loadStripe(stripeApiKey)}>
-                  <ProtectedRoute exact path="/payment" component={Payment} />
-                </Elements>
-              )}
+              <ProtectedRoute
+                exact
+                path="/payment"
+                component={(props) => {
+                  if (stripeLoading) {
+                    return (
+                      <div style={{ padding: "2rem", textAlign: "center" }}>
+                        Loading payment configuration...
+                      </div>
+                    );
+                  }
+
+                  if (stripeError || !stripePromise) {
+                    return (
+                      <div style={{ padding: "2rem", textAlign: "center" }}>
+                        <p>{stripeError || "Payment is temporarily unavailable."}</p>
+                        <button onClick={getStripeApiKey}>Retry</button>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <Elements stripe={stripePromise}>
+                      <Payment {...props} />
+                    </Elements>
+                  );
+                }}
+              />
             </Switch>
             <Footer />
           </MainLayout>
